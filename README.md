@@ -1,32 +1,25 @@
 # POC LocalStack + Go (SQS)
 
-Esta prova de conceito demonstra o uso do LocalStack — uma plataforma que emula localmente serviços da AWS — para criar, enviar e consumir mensagens em uma fila Amazon SQS sem necessidade de acessar a nuvem real.
+Esta prova de conceito demonstra o uso do **LocalStack** — uma plataforma que emula localmente serviços da AWS — para criar, enviar e consumir mensagens em uma fila **Amazon SQS** sem necessidade de acessar a nuvem real.
 
-O LocalStack permite executar e testar integrações com APIs AWS de forma isolada, rápida e sem custo, simulando o comportamento dos serviços de forma compatível com os SDKs oficiais. Ele é especialmente útil para:
+O **LocalStack** permite executar e testar integrações com APIs AWS de forma isolada, rápida e sem custo, simulando o comportamento dos serviços de forma compatível com os SDKs oficiais. Ele é especialmente útil para:
 
-Desenvolver e validar integrações AWS em ambiente local, sem depender de recursos remotos.
-
-Criar pipelines de testes automatizados que envolvem serviços AWS.
-
-Reduzir custos e riscos ao evitar a utilização de infraestrutura real para testes.
-
-Trabalhar offline ou em ambientes controlados (ex.: CI/CD).
+* Desenvolver e validar integrações AWS em ambiente local, sem depender de recursos remotos.
+* Criar pipelines de testes automatizados que envolvem serviços AWS.
+* Reduzir custos e riscos ao evitar a utilização de infraestrutura real para testes.
+* Trabalhar offline ou em ambientes controlados (ex.: CI/CD).
 
 Nesta POC, o objetivo é:
 
-Subir um ambiente LocalStack com suporte ao SQS via Docker Compose.
+1. Subir um ambiente LocalStack com suporte ao SQS via Docker Compose.
+2. Criar automaticamente uma fila SQS durante a inicialização.
+3. Utilizar uma aplicação em **Go** para interagir com essa fila:
 
-Criar automaticamente uma fila SQS durante a inicialização.
+   * Garantir a criação da fila.
+   * Enviar uma mensagem com metadados.
+   * Ler a mensagem e removê-la da fila.
 
-Utilizar uma aplicação em Go para interagir com essa fila:
-
-Garantir a criação da fila.
-
-Enviar uma mensagem com metadados.
-
-Ler a mensagem e removê-la da fila.
-
-Esse fluxo cobre um caso comum de uso: processamento assíncrono e troca de mensagens entre sistemas desacoplados, validando que a aplicação consegue operar com SQS utilizando exatamente o mesmo código e SDK que usaria em produção na AWS, apenas trocando o endpoint para apontar ao LocalStack.
+Esse fluxo cobre um caso comum de uso: **processamento assíncrono** e **troca de mensagens entre sistemas desacoplados**, validando que a aplicação consegue operar com SQS utilizando exatamente o mesmo código e SDK que usaria em produção na AWS, apenas trocando o endpoint para apontar ao LocalStack.
 
 ## Stack
 
