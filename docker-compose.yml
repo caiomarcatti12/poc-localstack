@@ -1,5 +1,3 @@
-name: localstack
-
 services:
   poc-localstack:
     image: localstack/localstack:latest
@@ -19,7 +17,7 @@ services:
   poc-localstack-app:
     build: 
       context: .
-      dockerfile: ./app/Dockerfile
+      dockerfile: ./app/scripts/Dockerfile
     container_name: poc-localstack-app
     image: caiomarcatti12/poc-localstack-app:dev
     depends_on:
