@@ -156,14 +156,9 @@ Como o código está em bind mount (`./app:/app`), alterações locais refletem 
 Para parar e remover todos os containers:
 
 ```bash
-docker compose down -v
+docker compose down
 ```
 
-Para remover também containers órfãos:
-
-```bash
-docker compose down -v --remove-orphans
-```
 
 ## Referências
 
