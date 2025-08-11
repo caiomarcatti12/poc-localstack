@@ -1,0 +1,40 @@
+name: localstack
+
+services:
+  poc-localstack:
+    image: localstack/localstack:latest
+    container_name: poc-localstack
+    ports:
+      - "4566:4566" 
+      - "4510-4559:4510-4559"
+    environment:
+      - SERVICES=sqs
+      - AWS_REGION=us-east-1
+      - QUEUE_NAME=demo-queue
+    volumes:
+      - "./init-scripts:/etc/localstack/init/ready.d"
+    networks:
+      - localstack-net
+
+  poc-localstack-app:
+    build: 
+      context: .
+      dockerfile: ./app/Dockerfile
+    container_name: poc-localstack-app
+    image: caiomarcatti12/poc-localstack-app:dev
+    depends_on:
+      - poc-localstack
+    environment:
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - LOCALSTACK_ENDPOINT=http://poc-localstack:4566
+      - QUEUE_NAME=demo-queue
+    volumes:
+      - ./app:/app
+    networks:
+      - localstack-net
+
+networks:
+  localstack-net:
+    driver: bridge
