@@ -10,7 +10,7 @@ services:
       - AWS_REGION=us-east-1
       - QUEUE_NAME=demo-queue
     volumes:
-      - "./init-scripts:/etc/localstack/init/ready.d"
+      - "./localstack:/etc/localstack/init/ready.d"
     networks:
       - localstack-net
 
